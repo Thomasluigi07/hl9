@@ -1,0 +1,270 @@
+[gd_scene load_steps=21 format=3 uid="uid://f4m1s2tthp46"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_8cd4h"]
+[ext_resource type="PackedScene" uid="uid://cpw1cgh0kkmwx" path="res://crossfire.tscn" id="1_r0070"]
+[ext_resource type="Texture2D" uid="uid://7blwfh61d0kd" path="res://images/skybox.png" id="2_55ft5"]
+[ext_resource type="Texture2D" uid="uid://vhoyxfqv24ay" path="res://images/149254-2.png" id="4_4m2qn"]
+[ext_resource type="FontFile" uid="uid://eo8s6mheayk3" path="res://trebuc.ttf" id="4_h7q5j"]
+[ext_resource type="AudioStream" uid="uid://btuwd71nb7ao0" path="res://audio/launch_select2.wav" id="5_e5dp3"]
+[ext_resource type="AudioStream" uid="uid://cqv5d3rk7iuj4" path="res://audio/talk.wav" id="5_rnnou"]
+[ext_resource type="AudioStream" uid="uid://cfwg3w30weier" path="res://audio/launch_upmenu1.wav" id="6_xwha1"]
+[ext_resource type="AudioStream" uid="uid://q1s6tn82ohlp" path="res://audio/launch_dnmenu1.wav" id="7_fidh2"]
+[ext_resource type="AudioStream" uid="uid://bvcii2gehrwes" path="res://audio/launch_glow1.wav" id="8_5iper"]
+[ext_resource type="FontFile" uid="uid://jg1cllowvjqb" path="res://tahoma.ttf" id="10_trbxr"]
+[ext_resource type="Texture2D" uid="uid://dqxrj76dj42ds" path="res://background-2.jpg" id="11_b61us"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3hkow"]
+panorama = ExtResource("2_55ft5")
+
+[sub_resource type="Sky" id="Sky_85og6"]
+sky_material = SubResource("PanoramaSkyMaterial_3hkow")
+
+[sub_resource type="Environment" id="Environment_kj08d"]
+background_mode = 2
+sky = SubResource("Sky_85og6")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_q3yvj"]
+font = ExtResource("4_h7q5j")
+font_size = 65
+outline_color = Color(0.568627, 0.568627, 0.568627, 0.490196)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.376471)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cev01"]
+font = ExtResource("10_trbxr")
+shadow_color = Color(0, 0, 0, 0.580392)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nlc7f"]
+font = ExtResource("4_h7q5j")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_n8m14"]
+font = ExtResource("4_h7q5j")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_guisv"]
+font = ExtResource("4_h7q5j")
+font_size = 60
+font_color = Color(1, 0.635294, 0, 0.509804)
+
+[node name="World" type="Node"]
+script = ExtResource("1_8cd4h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 23.9136, 18.1213, 17.7087)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kj08d")
+
+[node name="Crossfire" parent="." instance=ExtResource("1_r0070")]
+
+[node name="Talk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rnnou")
+
+[node name="MenuSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_e5dp3")
+volume_db = 6.0
+
+[node name="MenuUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_xwha1")
+volume_db = 6.0
+
+[node name="MenuDown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_fidh2")
+volume_db = 6.0
+
+[node name="MenuGlow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_5iper")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Logo" type="Label" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "H λ L F - L I F E 9"
+label_settings = SubResource("LabelSettings_q3yvj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Build" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -238.0
+offset_bottom = 51.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+text = "Source 8 - build 912832
+Days until release: 363 days"
+label_settings = SubResource("LabelSettings_cev01")
+horizontal_alignment = 2
+
+[node name="MenuBG" type="TextureRect" parent="CanvasLayer"]
+z_index = -4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("11_b61us")
+stretch_mode = 1
+
+[node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.0
+offset_top = -153.5
+offset_right = 278.0
+offset_bottom = 153.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Offline mode"
+label_settings = SubResource("LabelSettings_nlc7f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Play offline"
+text = "Play"
+
+[node name="Label2" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Online Mode (Requires UPNP)"
+label_settings = SubResource("LabelSettings_n8m14")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Host a game online"
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Join an online game"
+text = "Join"
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Enter IP Address of the host to join."
+placeholder_text = "Enter IP Address"
+alignment = 1
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 37.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_4m2qn")
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -116.0
+offset_right = 582.0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 100
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = " • 100"
+label_settings = SubResource("LabelSettings_guisv")
+vertical_alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -582.0
+offset_top = -116.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 100
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "17 |     ∞ "
+label_settings = SubResource("LabelSettings_guisv")
+vertical_alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.81815, 8.48056e-17, -0.575005, 3.48787e-16, 1, -3.48787e-16, 0.575005, -4.85914e-16, -0.81815, -10.6903, 5.2891, 39.1258)
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="text_submitted" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry" to="." method="_on_address_entry_text_submitted"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

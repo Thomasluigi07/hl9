@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dte0ymi2ru2my"]
+
+[ext_resource type="PackedScene" uid="uid://do2bu3a0tj12i" path="res://models/glock/gun.gltf" id="1_ebbar"]
+
+[node name="Gun" instance=ExtResource("1_ebbar")]

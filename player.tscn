@@ -1,0 +1,303 @@
+[gd_scene load_steps=25 format=3 uid="uid://djshm1u6cg7yo"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_2ldmh"]
+[ext_resource type="PackedScene" uid="uid://4cpnhy0qiwto" path="res://gordon.tscn" id="2_a1ogy"]
+[ext_resource type="PackedScene" uid="uid://do2bu3a0tj12i" path="res://models/glock/gun.gltf" id="2_qj3ym"]
+[ext_resource type="Texture2D" uid="uid://bm7afmfhoiql" path="res://images/star_06.png" id="3_lmd2k"]
+[ext_resource type="AudioStream" uid="uid://bq6bi1jjno8mf" path="res://audio/pl_gun3.wav" id="4_2ixtk"]
+[ext_resource type="AudioStream" uid="uid://00oj0etgofwa" path="res://audio/pl_step1.wav" id="5_1ybee"]
+[ext_resource type="AudioStream" uid="uid://ivva0wmvp8ie" path="res://audio/pl_step3.wav" id="5_u40m0"]
+[ext_resource type="AudioStream" uid="uid://veaswa3rsw7e" path="res://audio/pl_step2.wav" id="6_dklj3"]
+[ext_resource type="AudioStream" uid="uid://b5qimr31u58m4" path="res://audio/pl_step4.wav" id="8_jebxv"]
+[ext_resource type="AudioStream" uid="uid://d0n4cmbj4qpn3" path="res://audio/hev_death.wav" id="9_ooffu"]
+[ext_resource type="AudioStream" uid="uid://bk5hwl1jqgaxc" path="res://audio/gunpickup2.wav" id="10_3inpy"]
+[ext_resource type="PackedScene" uid="uid://bwlhtpk2llm7d" path="res://bubsy.tscn" id="12_d1els"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fc3fm"]
+margin = 0.198
+radius = 0.3465
+height = 1.72419
+
+[sub_resource type="Gradient" id="Gradient_ixq54"]
+offsets = PackedFloat32Array(0.0198238, 0.196035, 0.693833, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mcr14"]
+gradient = SubResource("Gradient_ixq54")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u6ama"]
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+angle_min = 45.0
+angle_max = 45.0
+color_ramp = SubResource("GradientTexture1D_mcr14")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83iud"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.960784, 0.831373, 0.403922, 1)
+albedo_texture = ExtResource("3_lmd2k")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8nig7"]
+material = SubResource("StandardMaterial3D_83iud")
+size = Vector2(0.5, 0.5)
+orientation = 2
+
+[sub_resource type="Animation" id="Animation_lni6t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/gun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.114941, -0.227989, -0.2121)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/gun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.49815e-17, -1.61288, 7.11938e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_btph8"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/gun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0.114941, -0.227989, -0.2121), Vector3(0.163069, -0.279781, -0.216547)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/gun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(1.49815e-17, -1.61288, 7.11938e-16), Vector3(1.49815e-17, -1.61288, 7.11938e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_dxcqr"]
+resource_name = "move"
+length = 0.7
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/gun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0.114941, -0.227989, -0.2121), Vector3(0.114941, -0.227989, -0.150046)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/gun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(1.49815e-17, -1.61288, 7.11938e-16), Vector3(1.49815e-17, -1.61288, 7.11938e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_n0av2"]
+resource_name = "shot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/gun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector3(0.114941, -0.227989, -0.2121), Vector3(0.114941, -0.227989, -0.2121), Vector3(0.114941, -0.227989, -0.2121)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/gun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector3(1.49815e-17, -1.61288, 7.11938e-16), Vector3(3.26492e-09, -1.61288, -0.390762), Vector3(3.48787e-16, -1.61268, 3.48787e-16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j8rb3"]
+_data = {
+"RESET": SubResource("Animation_lni6t"),
+"idle": SubResource("Animation_btph8"),
+"move": SubResource("Animation_dxcqr"),
+"shot": SubResource("Animation_n0av2")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lkt3b"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath("Camera3D:rotation")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+properties/3/path = NodePath("PlayerModel/gunshot:playing")
+properties/3/spawn = true
+properties/3/sync = true
+properties/3/watch = false
+properties/4/path = NodePath("PlayerModel/walk1:playing")
+properties/4/spawn = true
+properties/4/sync = true
+properties/4/watch = false
+properties/5/path = NodePath("PlayerModel/walk2:playing")
+properties/5/spawn = true
+properties/5/sync = true
+properties/5/watch = false
+properties/6/path = NodePath("PlayerModel/walk3:playing")
+properties/6/spawn = true
+properties/6/sync = true
+properties/6/watch = false
+properties/7/path = NodePath("PlayerModel/walk4:playing")
+properties/7/spawn = true
+properties/7/sync = true
+properties/7/watch = false
+properties/8/path = NodePath("PlayerModel/gunpickup:playing")
+properties/8/spawn = true
+properties/8/sync = true
+properties/8/watch = false
+properties/9/path = NodePath("PlayerModel/death:playing")
+properties/9/spawn = true
+properties/9/sync = true
+properties/9/watch = false
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_2ldmh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016, 0.87, -0.006)
+shape = SubResource("CapsuleShape3D_fc3fm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08158e-12, 1.711, -0.188354)
+
+[node name="gun" parent="Camera3D" instance=ExtResource("2_qj3ym")]
+transform = Transform3D(-0.0420712, 1.49839e-17, -0.999113, 7.11937e-16, 1, -1.49815e-17, 0.999113, -7.11938e-16, -0.0420712, 0.114941, -0.227989, -0.2121)
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="Camera3D/gun"]
+transform = Transform3D(1, -6.61998e-23, 1.05495e-08, 4.87421e-22, 1, 3.08376e-22, 2.13422e-10, 5.52835e-22, 1, -0.253624, 0.153818, -0.00449403)
+emitting = false
+amount = 1
+lifetime = 0.1
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_u6ama")
+draw_pass_1 = SubResource("PlaneMesh_8nig7")
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(2.08165e-12, 2.08165e-12, -50)
+collision_mask = 2
+
+[node name="GordonModel" parent="." instance=ExtResource("2_a1ogy")]
+transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 0, 0, 0)
+
+[node name="gunshot" type="AudioStreamPlayer3D" parent="GordonModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.679, 2.08165e-12)
+stream = ExtResource("4_2ixtk")
+max_distance = 20.0
+max_polyphony = 1000
+
+[node name="walk1" type="AudioStreamPlayer3D" parent="GordonModel"]
+transform = Transform3D(1, -4.02214e-24, 0, -4.02214e-24, 1, 0, 0, 0, 1, 2.08165e-12, 1.679, 2.08165e-12)
+stream = ExtResource("5_1ybee")
+max_distance = 20.0
+max_polyphony = 1000
+
+[node name="walk2" type="AudioStreamPlayer3D" parent="GordonModel"]
+transform = Transform3D(1, -4.02214e-24, 0, -4.02214e-24, 1, 0, 0, 0, 1, 2.08165e-12, 1.679, 2.08165e-12)
+stream = ExtResource("6_dklj3")
+max_distance = 20.0
+max_polyphony = 1000
+
+[node name="walk3" type="AudioStreamPlayer3D" parent="GordonModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.679, 2.08165e-12)
+stream = ExtResource("5_u40m0")
+max_distance = 20.0
+max_polyphony = 1000
+
+[node name="walk4" type="AudioStreamPlayer3D" parent="GordonModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.679, 2.08165e-12)
+stream = ExtResource("8_jebxv")
+max_distance = 20.0
+max_polyphony = 1000
+
+[node name="gunpickup" type="AudioStreamPlayer3D" parent="GordonModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.679, 2.08165e-12)
+stream = ExtResource("10_3inpy")
+max_distance = 20.0
+max_polyphony = 1000
+
+[node name="death" type="AudioStreamPlayer3D" parent="GordonModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.679, 2.08165e-12)
+stream = ExtResource("9_ooffu")
+max_distance = 20.0
+max_polyphony = 1000
+
+[node name="AudioListener3D" type="AudioListener3D" parent="GordonModel"]
+transform = Transform3D(1, -4.02214e-24, 0, -4.02214e-24, 1, 0, 0, 0, 1, -1.57062e-22, 1.67859, 0)
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+playback_default_blend_time = 0.1
+libraries = {
+"": SubResource("AnimationLibrary_j8rb3")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lkt3b")
+
+[node name="BubsyModel" parent="." instance=ExtResource("12_d1els")]
+transform = Transform3D(-0.2, 6.97574e-17, 1.74846e-08, 6.97574e-17, 0.2, -6.97574e-17, -1.74846e-08, -6.97574e-17, -0.2, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
