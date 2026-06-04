@@ -7,4 +7,4 @@ I originally planned to release an update for the game on the 19th of November, 
 You can find the update plans I had in the UPDATE.rtf file.
 
 
-Looking for the website? [Go here](https://github.com/Thomasluigi07/hl9/tree/website).
+Looking for the website? [Go here](https://github.com/Tamasina07/hl9/tree/website).
